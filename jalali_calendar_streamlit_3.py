@@ -105,38 +105,11 @@ def jalali_converter(input_month=None):
     elif isinstance(input_month,int):
         return borg_be_mah[input_month]
 # jalli_converter('مرداد')  #5
-# jalli_converter('مرداد')  #5
 # jalli_converter(7) # 'مهر'
 
 
 
 # ///////////
-
-
-
-
-warnings.filterwarnings('ignore')
-st.set_page_config(page_title=' jalali calander streamlit ',
-                  page_icon=':bar_chart',)
-
-title_page='jalali calendar streamlit  '
-alignment='center'
-# ;color:{color};
-color='white'
-font_size=30
-st.markdown(f"<h1 style='font-size:{font_size};text-align:{alignment};'>{title_page}</h1>",
-           unsafe_allow_html=True
-           )
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -273,8 +246,23 @@ def Jalali_Streamlit_calendar(
 # ///////////////////// بکار بستن تابع -نمونه ---------------------------------------
 
 
+warnings.filterwarnings('ignore')
+st.set_page_config(page_title=' jalali calander streamlit ',
+                  page_icon=':bar_chart',)
+
+title_page='jalali calendar streamlit  '
+alignment='center'
+# ;color:{color};
+color='white'
+font_size=30
+st.markdown(f"<h1 style='font-size:{font_size};text-align:{alignment};'>{title_page}</h1>",
+           unsafe_allow_html=True
+           )
+
+
+
 col1,col2,col3,col4=st.columns(4)
-# اینجا میگیم دراز در کجا باشه 
+# اینجا میگیم از در کجا باشه 
 the_from=Jalali_Streamlit_calendar(
     st_col=col4,   # در چه ستونی از صفحه اصلی جابگیره
     title='از چه بازه زمانی',
