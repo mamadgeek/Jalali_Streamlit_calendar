@@ -134,7 +134,6 @@ st.markdown(f"<h1 style='font-size:{font_size};text-align:{alignment};'>{title_p
 
 
 
-col1,col2,col3,col4=st.columns(4)
 
 
 
@@ -143,7 +142,7 @@ col1,col2,col3,col4=st.columns(4)
 
 # # تابعی که تاریخ جلالی را با سلکت میسازه و خروجی را میده تاریخ انتخاب شده را میده به صورت جلالی یا میلادی
 def Jalali_Streamlit_calendar(
-    st_col=col1,
+    st_col=None,
     title='از چه بازه زمانی',
     frmt='gr',
     identifier='' ,# کلید های مختلفی از یک تابع با این میشه ساخت
@@ -234,13 +233,13 @@ def Jalali_Streamlit_calendar(
                  'aknun_h':datetime.datetime.now().hour,
                 'before_after_h':setter_hour_before_after(default_hour_list[1] if default_hour_list[0]=='before_after_h'  else 0  ,now_time= datetime.datetime.now().hour) 
     } 
-
+    # اگه فقط تاریخ و روز باشه اینو میاریم 
     if format_datetime=='date': 
         # تبدیل چیزی که اانتخاب شده به فرمت ها
         selected_date_jl=jdatetime.datetime.strptime(f"{year}/{jalali_converter(month)}/{day}","%Y/%m/%d" )
         selected_date_gr=pd.to_datetime(selected_date_jl.togregorian()).date()
         selected_date_jl=selected_date_jl.date()
-    
+    # اگه بخوایم ساعت هم باشه و دقیقه اینو میاریم
     if format_datetime=='datetime':
         the_hour = st_col.time_input('برگزیدن ساعت',
                   value=datetime.time(default_hour_dict[default_hour_list[0]]),
@@ -271,15 +270,16 @@ def Jalali_Streamlit_calendar(
 
 
 
-# ///////////////////// بکار بستن تابع ---------------------------------------
+# ///////////////////// بکار بستن تابع -نمونه ---------------------------------------
 
 
-
+col1,col2,col3,col4=st.columns(4)
+# اینجا میگیم دراز در کجا باشه 
 the_from=Jalali_Streamlit_calendar(
-    st_col=col4,
+    st_col=col4,   # در چه ستونی از صفحه اصلی جابگیره
     title='از چه بازه زمانی',
     frmt='jl',
-    identifier='' ,# کلید های مختلفی از یک تابع با این میشه ساخت
+    identifier='' ,#  - اگه اینو نزاریم خطا میده چون باید  از  یک دکمه چند نمونه بداریم  - کلید های مختلفی از یک تابع با این میشه ساخت
     the_size=18,
     
     alignment = 'center',
@@ -298,12 +298,12 @@ the_from=Jalali_Streamlit_calendar(
     # default_hour=('before_after_h',-2) 
     step_hour=1)
 
-
+# اینجا هم مشخصات تا را میدیم. که یعنی تا چه بازه زملنی باشه
 the_to=Jalali_Streamlit_calendar(
     st_col=col3,
     title='تا چه بازه زمانی',
     frmt='jl',
-    identifier='' ,# کلید های مختلفی از یک تابع با این میشه ساخت
+    identifier='' ,#  کلید های مختلفی از یک تابع با این میشه ساخت
     the_size=18,
     
     alignment = 'center',
@@ -324,8 +324,7 @@ the_to=Jalali_Streamlit_calendar(
 
 
 
-# /////  حالا میشه استنفاده کرد .
-
+# حالا فقط نمایش در صفحه میدیم و هیچ ارزش دیگه نداره
 st.write(the_from)
 st.write(the_to)
 
